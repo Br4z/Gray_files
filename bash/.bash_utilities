@@ -1,0 +1,112 @@
+#  __  __   ______  __   __       __   ______  __   ______   ______
+# /\ \/\ \ /\__  _\/\ \ /\ \     /\ \ /\__  _\/\ \ /\  ___\ /\  ___\
+# \ \ \_\ \\/_/\ \/\ \ \\ \ \____\ \ \\/_/\ \/\ \ \\ \  __\ \ \___  \
+#  \ \_____\  \ \_\ \ \_\\ \_____\\ \_\  \ \_\ \ \_\\ \_____\\/\_____\
+#   \/_____/   \/_/  \/_/ \/_____/ \/_/   \/_/  \/_/ \/_____/ \/_____/
+
+# ---------------------------------------------------------------------------- #
+#                                    ALIASES                                   #
+# ---------------------------------------------------------------------------- #
+
+# ------------------------------------ CAT ----------------------------------- #
+
+alias cat='bat'
+alias catn='bat --style=plain'
+alias catnp='bat --style=plain --paging=never'
+
+# ------------------------------------ LS ------------------------------------ #
+
+alias ll='lsd -lh --group-dirs=first'
+alias la='lsd -a --group-dirs=first'
+alias l='lsd --group-dirs=first'
+alias lla='lsd -lha --group-dirs=first'
+alias ls='lsd --group-dirs=first'
+
+# ----------------------------------- OTHER ---------------------------------- #
+
+alias vi='nvim'
+alias nvimcf='cd ~/.config/nvim'
+alias src='source ~/.bashrc'
+alias dirty-cache='watch -t -n 1 "cat /proc/meminfo | grep Dirty"'
+
+alias cp='cp -i'     # Confirm before overwriting something
+alias df='df -h'     # Human-readable sizes
+alias free='free -m' # Show sizes in MB
+
+alias icat='kitty +kitten icat'
+alias programming='cd /mnt/g/Programming'
+
+# ---------------------------------------------------------------------------- #
+#                                   FUNCTIONS                                  #
+# ---------------------------------------------------------------------------- #
+
+mkcd () {
+	mkdir $1
+	cd $1
+}
+
+run_c() {
+	echo "Executing..."
+
+	if [[ "$1" != "0" ]]; then
+		if [[ -e "$2" ]]; then
+			g++ "$2" -o main
+			shift 2
+		else
+			echo "Error: source file not found"
+			return 1
+		fi
+	else
+		source_files=$(find . -name "*.cpp")
+
+		if [[ -z "$source_files" ]]; then
+			echo "Error: no .cpp files found"
+			return 1
+		fi
+
+		g++ $source_files -o main
+		shift 1
+	fi
+
+	if [[ $? -eq 0 ]]; then
+		./main "$@"
+		rm ./main
+
+		return $?
+	else
+		return 1
+	fi
+}
+
+# ex - archive extractor
+# usage: ex <file>
+ex () {
+	if [ -f $1 ] ; then
+		case $1 in
+			*.tar.bz2) tar xjf $1   ;;
+			*.tar.gz)  tar xzf $1   ;;
+			*.bz2)     bunzip2 $1   ;;
+			*.rar)     unrar x $1   ;;
+			*.gz)      gunzip $1    ;;
+			*.tar)     tar xf $1    ;;
+			*.tbz2)    tar xjf $1   ;;
+			*.tgz)     tar xzf $1   ;;
+			*.zip)     unzip $1     ;;
+			*.Z)       uncompress $1;;
+			*.7z)      7z x $1      ;;
+			*)         echo "'$1' cannot be extracted via ex()" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
+}
+
+set_target() {
+	ip_address=$1
+	machine_name=$2
+	echo "$ip_address $machine_name" > $HOME/.config/polybar/scripts/target_content
+}
+
+clear_target() {
+	echo "" > $HOME/.config/polybar/scripts/target_content
+}

@@ -1,0 +1,19 @@
+#! /bin/sh
+#  ______     ______   ______   ______
+# /\  __ \   /\  == \ /\  == \ /\  ___\
+# \ \  __ \  \ \  _-/ \ \  _-/ \ \___  \
+#  \ \_\ \_\  \ \_\    \ \_\    \/\_____\
+#   \/_/\/_/   \/_/     \/_/     \/_____/
+
+
+case "$1" in
+	--menu)
+		rofi -show drun \
+		-theme $HOME/.config/rofi/launcher.rasi & disown;;
+	--terminal)
+		kitty & disown;;
+	--soundcontrol)
+		pavucontrol & disown;;
+	*)
+		echo "Invalid option";;
+esac
