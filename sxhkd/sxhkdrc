@@ -72,4 +72,4 @@ super + {Left,Down,Up,Right}
 
 # Custom resize
 super + alt + {Left,Down,Up,Right}
-	/home/brandon/.config/bspwm/scripts/resize {west,south,north,east}
+	$HOME/.config/bspwm/scripts/resize {west,south,north,east}

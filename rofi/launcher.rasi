@@ -6,7 +6,7 @@
 	red:   #AF5F5F;
 	black: #1C1C1C;
 	white: #6C6C6C;
-	
+
 	background-color:   transparent;
 	text-color:         @white;
 	accent-color:       @white;

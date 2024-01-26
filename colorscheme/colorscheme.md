@@ -14,14 +14,14 @@ foreground = #BCBCBC
 ## Normal
 
 ```INI
-black = #1C1C1C
-red = #AF5F5F
-green = #5F875F
-yellow = #87875F
-blue = #5F87AF
+black   = #1C1C1C
+red     = #AF5F5F
+green   = #5F875F
+yellow  = #87875F
+blue    = #5F87AF
 magenta = #5F5F87
-cyan = #5F8787
-white = #6C6C6C
+cyan    = #5F8787
+white   = #6C6C6C
 ```
 
 ![Normal visualization](./Apprentice%20(normal).png)
@@ -31,29 +31,16 @@ white = #6C6C6C
 ## Bright
 
 ```INI
-black = #444444
-red = #D78787
-green = #87AF87
-yellow = #FFFFAF
-blue = #87AFD7
+black   = #444444
+red     = #D78787
+green   = #87AF87
+yellow  = #FFFFAF
+blue    = #87AFD7
 magenta = #8787AF
-cyan = #5FAFAF
-white = #FFFFFF
+cyan    = #5FAFAF
+white   = #FFFFFF
 ```
 
 ![Bright visualization](./Apprentice%20(bright).png)
 
 > [coolors visualization](https://coolors.co/444444-d78787-87af87-ffffaf-87afd7-8787af-5fafaf-ffffff).
-
-## everything_i_see_is_gray
-
-```INI
-background = #6C6C6C
-foreground = #BCBCBC
-
-white = #FFFFFF
-```
-
-![Visualization](./everything_i_see_is_gray.png)
-
-> [coolors visualization](https://coolors.co/visualizer/6c6c6c-bcbcbc-ffffff).

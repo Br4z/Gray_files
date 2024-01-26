@@ -40,12 +40,12 @@ alias programming='cd /mnt/g/Programming'
 #                                   FUNCTIONS                                  #
 # ---------------------------------------------------------------------------- #
 
-mkcd () {
+function mkcd {
 	mkdir $1
 	cd $1
 }
 
-run_c() {
+function run_c {
 	echo "Executing..."
 
 	if [[ "$1" != "0" ]]; then
@@ -80,7 +80,7 @@ run_c() {
 
 # ex - archive extractor
 # usage: ex <file>
-ex () {
+function ex {
 	if [ -f $1 ] ; then
 		case $1 in
 			*.tar.bz2) tar xjf $1   ;;
@@ -101,12 +101,12 @@ ex () {
 	fi
 }
 
-set_target() {
+function set_target {
 	ip_address=$1
 	machine_name=$2
 	echo "$ip_address $machine_name" > $HOME/.config/polybar/scripts/target_content
 }
 
-clear_target() {
+function clear_target {
 	echo "" > $HOME/.config/polybar/scripts/target_content
 }

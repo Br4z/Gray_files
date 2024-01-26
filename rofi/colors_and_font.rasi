@@ -1,0 +1,10 @@
+* {
+	font: "CaskaydiaCove Nerd Font Mono 10";
+
+	background:     #262626;
+	background-alt: #282B31FF;
+	foreground:     #BCBCBCFF; // Purple
+	selected:       #61AFEFFF; // Blue
+	active:         #98C379FF; // Pink
+	urgent:         #E06C75FF; // Dark Purple
+}
