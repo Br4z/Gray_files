@@ -8,13 +8,13 @@
 
 # CMDs
 uptime="`uptime -p | sed -e 's/up //g'`"
-host=`hostname`
+host=`cat /etc/hostname`
 
 # Options
-shutdown=' Shutdown'
-reboot='󰜉 Reboot'
-lock=' Lock'
-logout='󰍃 Logout'
+shutdown='󰐥'
+reboot='󰜉'
+lock=''
+logout='󰍃'
 yes='Yes'
 no='No'
 
@@ -22,7 +22,7 @@ function rofi_cmd {
 	rofi -dmenu \
 		-p "Uptime: $uptime" \
 		-mesg "Uptime: $uptime" \
-		-theme power_menu
+		-theme power_menu.rasi
 }
 
 function confirm_cmd {
@@ -33,8 +33,8 @@ function confirm_cmd {
 		-theme-str 'textbox {horizontal-align: 0.5;}' \
 		-dmenu \
 		-p 'Confirmation' \
-		-mesg 'Are you Sure?' \
-		-theme power_menu
+		-mesg 'Are you sure?' \
+		-theme power_menu.rasi
 }
 
 # Ask for confirmation
