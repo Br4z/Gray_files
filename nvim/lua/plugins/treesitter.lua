@@ -1,12 +1,14 @@
-local status, treesitter = pcall(require, "nvim-treesitter.configs")
-if not status then
-		print("treesitter plugin not found!")
-		return
-end
-
-treesitter.setup({
-		ensure_installed = { "lua", "javascript", "html" },
-		sync_install = false,
-		highlight = { enable = true },
-		indent = { enable = true },
-})
+return {
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+					ensure_installed = { "lua", "javascript", "html" },
+					sync_install = false,
+					highlight = { enable = true },
+					indent = { enable = true },
+			})
+		end
+	}
+}

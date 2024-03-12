@@ -36,6 +36,8 @@ alias free='free -m' # Show sizes in MB
 alias icat='kitty +kitten icat'
 alias programming='cd /mnt/g/Programming'
 
+alias kubectl="minikube kubectl --"
+
 # ---------------------------------------------------------------------------- #
 #                                   FUNCTIONS                                  #
 # ---------------------------------------------------------------------------- #
@@ -46,7 +48,7 @@ function mkcd {
 }
 
 function run_c {
-	echo "Executing..."
+	echo "Compiling..."
 
 	if [[ "$1" != "0" ]]; then
 		if [[ -e "$2" ]]; then
@@ -68,6 +70,8 @@ function run_c {
 		shift 1
 	fi
 
+	echo "Executing..."
+
 	if [[ $? -eq 0 ]]; then
 		./main "$@"
 		rm ./main
@@ -75,6 +79,56 @@ function run_c {
 		return $?
 	else
 		return 1
+	fi
+}
+
+run_java() {
+	echo "Compiling..."
+
+	if [ "$#" -ne 2 ]; then
+		echo "Error: the two arguments were not provided"
+		return 1
+	fi
+
+	if [ "$1" -eq 0 ]; then
+		if [ -f "$2" ]; then
+			javac "$2"
+			shift 2
+		else
+			echo "Error: source file not found"
+			return 1
+		fi
+
+		if [ "$?" -eq 0 ]; then
+			echo "Executing..."
+			java Main
+		else
+			return 1
+		fi
+	else
+		if [ -f "$2" ]; then
+			javac -d out "$2"
+			shift 2
+
+			if [ "$?" -eq 0 ] && [ -d "assets" ]; then
+				cp -r assets out
+			fi
+		else
+			echo "Error: source file not found"
+			return 1
+		fi
+
+		shift
+
+		if [ "$?" -eq 0 ]; then
+			echo "Executing..."
+			java -cp out Main "$@"
+
+			# Remove compiled files
+			# rm -r out
+		else
+			return 1
+		fi
 	fi
 }
 
