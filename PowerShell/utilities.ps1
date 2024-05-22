@@ -1,8 +1,16 @@
-Set-Alias -Name which -Value where.exe
+# ---------------------------------------------------------------------------- #
+#                                    ALIASES                                   #
+# ---------------------------------------------------------------------------- #
 
-Function programming { cd G:/Programming }
+Set-Alias -Name k -Value kubectl
+Set-Alias -Name vi -Value nvim
+function mkcd($dir) { mkdir $dir -Force; cd $dir }
+function programming { cd G:/Programming }
+function src { echo "reloading profile file..."; . $PROFILE }
 
-Function dendron { cd G:/Dendron }
+# ---------------------------------------------------------------------------- #
+#                                   FUNCTIONS                                  #
+# ---------------------------------------------------------------------------- #
 
 function run_c {
 	Write-Host "Compiling..."
@@ -26,13 +34,11 @@ function run_c {
 		$execution_args = $args[1..($args.Length - 1)]
 	}
 
-	if ($LASTEXITCODE -eq 0) {
+	if (Test-Path "./main.exe") {
 		Write-Host "Executing..."
 
-		& .\main.exe $execution_args
-		Remove-Item .\main.exe
-
-		# return $LASTEXITCODE
+		& ./main.exe $execution_args
+		Remove-Item ./main.exe
 	} else {
 		return 1
 	}
@@ -59,11 +65,11 @@ function run_java {
 			return 1
 		}
 	} else {
-		if (Test-Path "src") {
+		if (Test-Path "src/Main.java") {
 			& "javac" -d out src/Main.java
 
-			if ($LASTEXITCODE -eq 0 -And (Test-Path "assets")) {
-				Copy-Item -Path "assets" -Destination "out" -Recurse -Force
+			if ($LASTEXITCODE -eq 0 -And (Test-Path "src/assets")) {
+				Copy-Item -Path "src/assets" -Destination "out" -Recurse -Force
 			}
 
 		} else {
@@ -86,6 +92,14 @@ function run_java {
 	}
 }
 
-Function ff {
-	nvim $(fzf --preview "bat --style=numbers --color=always --line-range :500 {}")
+function ffe {
+	$selected_file = $(fzf --preview "bat --style=numbers --color=always --line-range :500 {}")
+
+	if ($selected_file) {
+		nvim $selected_file
+	}
+}
+
+function ff($name) {
+	find -name $name
 }

@@ -1,3 +1,4 @@
+#!/bin/bash
 #  __  __   ______  __   __       __   ______  __   ______   ______
 # /\ \/\ \ /\__  _\/\ \ /\ \     /\ \ /\__  _\/\ \ /\  ___\ /\  ___\
 # \ \ \_\ \\/_/\ \/\ \ \\ \ \____\ \ \\/_/\ \/\ \ \\ \  __\ \ \___  \
@@ -10,49 +11,49 @@
 
 # ------------------------------------ CAT ----------------------------------- #
 
-alias cat='bat'
-alias catn='bat --style=plain'
-alias catnp='bat --style=plain --paging=never'
+if which bat &>/dev/null; then
+	alias cat='bat'
+	alias catn='bat --style=plain'
+	alias catnp='bat --style=plain --paging=never'
+fi
 
 # ------------------------------------ LS ------------------------------------ #
 
-alias ll='lsd -lh --group-dirs=first'
-alias la='lsd -a --group-dirs=first'
-alias l='lsd --group-dirs=first'
-alias lla='lsd -lha --group-dirs=first'
-alias ls='lsd --group-dirs=first'
+if which lsd &>/dev/null; then
+	alias ll='lsd -lh --group-dirs=first'
+	alias la='lsd -a --group-dirs=first'
+	alias l='lsd --group-dirs=first'
+	alias lla='lsd -lha --group-dirs=first'
+	alias ls='lsd --group-dirs=first'
+fi
 
 # ----------------------------------- OTHER ---------------------------------- #
 
-alias vi='nvim'
-alias nvimcf='cd ~/.config/nvim'
-alias src='source ~/.bashrc'
-alias dirty-cache='watch -t -n 1 "cat /proc/meminfo | grep Dirty"'
-
 alias cp='cp -i'     # Confirm before overwriting something
 alias df='df -h'     # Human-readable sizes
+alias dirty-cache='watch -t -n 1 "cat /proc/meminfo | grep Dirty"'
 alias free='free -m' # Show sizes in MB
-
 alias icat='kitty +kitten icat'
-alias programming='cd /mnt/g/Programming'
-
 alias kubectl="minikube kubectl --"
+alias nvimcf='cd ~/.config/nvim'
+alias programming='cd /mnt/g/Programming'
 
 # ---------------------------------------------------------------------------- #
 #                                   FUNCTIONS                                  #
 # ---------------------------------------------------------------------------- #
 
 function mkcd {
-	mkdir $1
-	cd $1
+	mkdir "$1"
+	cd "$1" || exit 1
 }
 
 function run_c {
 	echo "Compiling..."
 
-	if [[ "$1" != "0" ]]; then
-		if [[ -e "$2" ]]; then
+	if [[ $1 == 0 ]]; then
+		if [[ -f "$2" ]]; then
 			g++ "$2" -o main
+
 			shift 2
 		else
 			echo "Error: source file not found"
@@ -67,16 +68,15 @@ function run_c {
 		fi
 
 		g++ $source_files -o main
+
 		shift 1
 	fi
 
 	echo "Executing..."
 
-	if [[ $? -eq 0 ]]; then
+	if [ -f "./main" ]; then
 		./main "$@"
 		rm ./main
-
-		return $?
 	else
 		return 1
 	fi
@@ -85,48 +85,37 @@ function run_c {
 run_java() {
 	echo "Compiling..."
 
-	if [ "$#" -ne 2 ]; then
-		echo "Error: the two arguments were not provided"
-		return 1
-	fi
-
 	if [ "$1" -eq 0 ]; then
 		if [ -f "$2" ]; then
-			javac "$2"
-			shift 2
+			shift 1
+			if javac "$1"; then
+				echo "Executing..."
+				java Main "$@"
+			else
+				return 1
+			fi
+
 		else
 			echo "Error: source file not found"
-			return 1
+			exit 1
 		fi
+	elif [ "$1" -eq 1 ]; then
+		if [ -f "src/Main.java" ]; then
+			if javac -d out src/Main.java; then
+				shift 2
 
-		if [ "$?" -eq 0 ]; then
-			echo "Executing..."
-			java Main
-		else
-			return 1
-		fi
-	else
-		if [ -f "$2" ]; then
-			javac -d out "$2"
-			shift 2
+				if [ -d "src/assets" ] && ! cp -rf src/assets out; then
+					echo "Error: something went wrong while copying the assets"
+				else
+					echo "Executing..."
+					java -cp out src.Main "$@"
 
-			if [ "$?" -eq 0 ] && [ -d "assets" ]; then
-				cp -r assets out
+					# Remove compiled files
+					# rm -r out
+				fi
 			fi
 		else
-			echo "Error: source file not found"
-			return 1
-		fi
-
-		shift
-
-		if [ "$?" -eq 0 ]; then
-			echo "Executing..."
-			java -cp out Main "$@"
-
-			# Remove compiled files
-			# rm -r out
-		else
+			echo "Error: src/Main.java file not found"
 			return 1
 		fi
 	fi
@@ -155,12 +144,14 @@ function ex {
 	fi
 }
 
-function set_target {
-	ip_address=$1
-	machine_name=$2
-	echo "$ip_address $machine_name" > $HOME/.config/polybar/scripts/target_content
-}
+if which polybar &>/dev/null; then
+	function set_target {
+		ip_address=$1
+		machine_name=$2
+		echo "$ip_address $machine_name" > "$HOME/.config/polybar/scripts/target_content"
+	}
 
-function clear_target {
-	echo "" > $HOME/.config/polybar/scripts/target_content
+	function clear_target {
+		echo "" > "$HOME/.config/polybar/scripts/target_content"
 }
+fi

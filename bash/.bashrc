@@ -1,40 +1,37 @@
+#!/bin/bash
 #  ______   ______   ______   __  __   ______   ______
 # /\  == \ /\  __ \ /\  ___\ /\ \_\ \ /\  == \ /\  ___\
 # \ \  __< \ \  __ \\ \___  \\ \  __ \\ \  __< \ \ \____
 #  \ \_____\\ \_\ \_\\/\_____\\ \_\ \_\\ \_\ \_\\ \_____\
 #   \/_____/ \/_/\/_/ \/_____/ \/_/\/_/ \/_/ /_/ \/_____/
 
-# source /usr/share/nvm/init-nvm.sh
-# export PATH=$PATH:/home/braz/.spicetify
 
 # ---------------------------------------------------------------------------- #
 #                                 SOURCE FILES                                 #
 # ---------------------------------------------------------------------------- #
 
-if [ -f ~/.bash_utilities ]; then
-	. ~/.bash_utilities
+if [ -f "$HOME/.bash_utilities" ]; then
+	source "$HOME/.bash_utilities"
 fi
 
-if [ -f ~/.bash_profile ]; then
-	. ~/.bash_profile
-fi
 
 # ---------------------------------------------------------------------------- #
 #                                    PROMPT                                    #
 # ---------------------------------------------------------------------------- #
 
-force_color_prompt=yes
+if which oh-my-posh &>/dev/null; then
+	theme_path=""
 
-function parse_git_dirty {
-	[[ $(git status --porcelain 2> /dev/null) ]] && echo "*"
-}
-function parse_git_branch {
-	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ (\1$(parse_git_dirty))/"
-}
+	if [ "$POSH_THEMES_PATH" ]; then
+		theme_path="$POSH_THEMES_PATH/kali.omp.json"
+	else
+		theme_path="$HOME/.oh_my_posh-theme.json"
+	fi
 
-export PS1="\n\t 󰣇 \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+	eval "$(oh-my-posh init bash --config "$theme_path")"
+fi
 
-[[ $- != *i* ]] && return
+[[ $- != *i* ]] && return # Exit if the current shell is not interactive
 
 # Change the window title of X terminals
 case ${TERM} in

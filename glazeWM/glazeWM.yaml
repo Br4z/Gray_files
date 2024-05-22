@@ -11,7 +11,7 @@ cyan: &cyan       "#5F8787"
 white: &white     "#6C6C6C"
 
 general:
-  focus_follows_cursor: true
+  focus_follows_cursor: false
 
   cursor_follow_focus: false
 
@@ -194,9 +194,6 @@ keybindings:
   - command: "tiling direction toggle"
     binding: "Alt+V"
 
-  - command: "focus mode toggle"
-    binding: "Alt+S"
-
   - command: "toggle floating"
     binding: "Alt+Shift+S"
 
@@ -215,7 +212,7 @@ keybindings:
   - command: "reload config"
     binding: "Alt+Shift+R"
 
-  - command: "exec %ProgramFiles%/WindowsApps/Microsoft.WindowsTerminal_1.18.3181.0_x64__8wekyb3d8bbwe/WindowsTerminal.exe"
+  - command: "exec wt"
     binding: "Alt+Enter"
 
   - command: "focus workspace 1"
@@ -247,3 +244,16 @@ keybindings:
 
   - commands: ["move to workspace 5", "focus workspace 5"]
     binding: "Alt+Shift+5"
+
+  # Move focused workspace to a monitor in a given direction.
+  - command: "move workspace left"
+    binding: "Alt+A"
+
+  - command: "move workspace right"
+    binding: "Alt+F"
+
+  - command: "move workspace up"
+    binding: "Alt+D"
+
+  - command: "move workspace down"
+    binding: "Alt+S"

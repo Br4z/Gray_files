@@ -1,40 +1,17 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions":
+    "actions": 
     [
         {
-            "command":
+            "command": 
             {
-                "action": "splitPane",
-                "split": "right"
-            }
-        },
-        {
-            "command":
-            {
-                "action": "moveFocus",
-                "direction": "down"
+                "action": "newTab"
             },
-            "keys": "ctrl+j"
+            "keys": "ctrl+shift+enter"
         },
         {
-            "command":
-            {
-                "action": "commandPalette"
-            },
-            "keys": "f1"
-        },
-        {
-            "command":
-            {
-                "action": "swapPane",
-                "direction": "left"
-            },
-            "keys": "ctrl+shift+h"
-        },
-        {
-            "command":
+            "command": 
             {
                 "action": "swapPane",
                 "direction": "down"
@@ -42,22 +19,46 @@
             "keys": "ctrl+shift+k"
         },
         {
-            "command":
+            "command": 
             {
-                "action": "newTab"
+                "action": "swapPane",
+                "direction": "left"
             },
-            "keys": "ctrl+shift+enter"
+            "keys": "ctrl+shift+h"
         },
         {
-            "command":
+            "command": 
             {
-                "action": "copy",
-                "singleLine": false
+                "action": "commandPalette"
             },
-            "keys": "ctrl+c"
+            "keys": "f1"
         },
         {
-            "command":
+            "command": "showContextMenu"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "down"
+            },
+            "keys": "ctrl+j"
+        },
+        {
+            "command": 
+            {
+                "action": "quakeMode"
+            }
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "right"
+            }
+        },
+        {
+            "command": 
             {
                 "action": "splitPane",
                 "split": "down"
@@ -280,15 +281,19 @@
             "keys": "ctrl+numpad0"
         },
         {
-            "command": "unbound",
-            "keys": "ctrl+h"
+            "command": 
+            {
+                "action": "copy",
+                "singleLine": false
+            },
+            "keys": "ctrl+c"
         },
         {
             "command": "paste",
             "keys": "ctrl+v"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "splitPane",
                 "split": "auto",
@@ -297,13 +302,13 @@
             "keys": "ctrl+enter"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "scrollDown"
             }
         },
         {
-            "command":
+            "command": 
             {
                 "action": "resizePane",
                 "direction": "left"
@@ -318,7 +323,15 @@
             "command": "openSystemMenu"
         },
         {
-            "command":
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "up"
+            },
+            "keys": "ctrl+up"
+        },
+        {
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "left"
@@ -326,7 +339,7 @@
             "keys": "ctrl+h"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "right"
@@ -334,14 +347,14 @@
             "keys": "ctrl+l"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "closeTab"
             },
             "keys": "ctrl+shift+w"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "up"
@@ -356,7 +369,7 @@
             "keys": "f9"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "newWindow"
             }
@@ -366,7 +379,7 @@
             "keys": "ctrl+w"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "swapPane",
                 "direction": "up"
@@ -374,7 +387,7 @@
             "keys": "ctrl+shift+j"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "swapPane",
                 "direction": "right"
@@ -382,7 +395,7 @@
             "keys": "ctrl+shift+l"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "scrollUp"
             }
@@ -396,10 +409,7 @@
             "keys": "ctrl+shift+down"
         },
         {
-            "command": "showContextMenu"
-        },
-        {
-            "command":
+            "command": 
             {
                 "action": "resizePane",
                 "direction": "down"
@@ -407,7 +417,7 @@
             "keys": "ctrl+down"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "resizePane",
                 "direction": "right"
@@ -415,15 +425,7 @@
             "keys": "ctrl+right"
         },
         {
-            "command":
-            {
-                "action": "resizePane",
-                "direction": "up"
-            },
-            "keys": "ctrl+up"
-        },
-        {
-            "command":
+            "command": 
             {
                 "action": "adjustFontSize",
                 "delta": 1.0
@@ -431,7 +433,7 @@
             "keys": "ctrl+numpad_plus"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "adjustFontSize",
                 "delta": -1.0
@@ -439,19 +441,13 @@
             "keys": "ctrl+numpad_minus"
         },
         {
-            "command":
-            {
-                "action": "quakeMode"
-            }
-        },
-        {
-            "command":
+            "command": 
             {
                 "action": "globalSummon"
             }
         },
         {
-            "command":
+            "command": 
             {
                 "action": "switchToTab",
                 "index": 0
@@ -459,7 +455,7 @@
             "keys": "ctrl+1"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "switchToTab",
                 "index": 1
@@ -467,7 +463,7 @@
             "keys": "ctrl+2"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "switchToTab",
                 "index": 2
@@ -486,21 +482,21 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-    "newTabMenu":
+    "newTabMenu": 
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles":
+    "profiles": 
     {
         "defaults": {},
-        "list":
+        "list": 
         [
             {
                 "colorScheme": "Apprentice",
                 "commandline": "C:\\Program Files\\PowerShell\\7\\pwsh.exe --NoLogo",
-                "font":
+                "font": 
                 {
                     "face": "CaskaydiaCove Nerd Font",
                     "size": 14.0
@@ -514,7 +510,7 @@
             {
                 "colorScheme": "Apprentice",
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
-                "font":
+                "font": 
                 {
                     "face": "CaskaydiaCove Nerd Font",
                     "size": 14.0
@@ -528,7 +524,7 @@
             {
                 "colorScheme": "Apprentice",
                 "commandline": "C:\\Windows\\system32\\wsl.exe -d Arch /usr/bin/bash",
-                "font":
+                "font": 
                 {
                     "face": "CaskaydiaCove Nerd Font",
                     "size": 14.0
@@ -539,10 +535,24 @@
                 "name": "Arch",
                 "opacity": 95,
                 "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "colorScheme": "Apprentice",
+                "commandline": "C:\\Program Files\\Git\\bin\\bash.exe",
+                "font": 
+                {
+                    "face": "CaskaydiaCove Nerd Font",
+                    "size": 14.0
+                },
+                "guid": "{6743e984-c7d1-4f46-846c-a6f8813a8f45}",
+                "hidden": false,
+                "icon": "D:\\pictures\\icons\\Git.png",
+                "name": "Git Bash",
+                "opacity": 95
             }
         ]
     },
-    "schemes":
+    "schemes": 
     [
         {
             "background": "#262626",

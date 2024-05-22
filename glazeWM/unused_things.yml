@@ -29,15 +29,7 @@ keybindings:
   - command: "focus workspace prev"
     binding: "Alt+Shift+T"
 
-  # Move focused workspace to a monitor in a given direction.
-  - command: "move workspace left"
-    binding: "Alt+A"
-
-  - command: "move workspace right"
-    binding: "Alt+F"
-
-  - command: "move workspace up"
-    binding: "Alt+D"
-
-  - command: "move workspace down"
+  - command: "focus mode toggle"
     binding: "Alt+S"
+
+
